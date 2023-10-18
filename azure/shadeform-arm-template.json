@@ -1,71 +1,76 @@
 {
- "$schema": "https://schema.management.azure.com/schemas/2019-08-01/subscriptionDeploymentTemplate.json#",
- "contentVersion": "1.0.0.0",
- "parameters": {
-  "mspOfferName": {
-   "type": "string",
-   "metadata": {
-    "description": "Specify a unique name for your offer"
-   },
-   "defaultValue": "shadeform-lighthouse"
-  },
-  "mspOfferDescription": {
-   "type": "string",
-   "metadata": {
-    "description": "Name of the Managed Service Provider offering"
-   },
-   "defaultValue": "Grant Shadeform access to create VMs in your account"
-  }
- },
- "variables": {
-  "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
-  "mspAssignmentName": "[guid(parameters('mspOfferName'))]",
-  "managedByTenantId": "0e9b4557-88c2-492c-a710-ab1f3308aa45",
-  "authorizations": [
-   {
-    "principalId": "bec65b29-fccc-4475-9ee2-c8432a9b3f01",
-    "roleDefinitionId": "d73bb868-a0df-4d4d-bd69-98a00b01fccb",
-    "principalIdDisplayName": "shadeform-customer-app"
-   },
-   {
-    "principalId": "bec65b29-fccc-4475-9ee2-c8432a9b3f01",
-    "roleDefinitionId": "4d97b98b-1d4f-4787-a291-c67834d212e7",
-    "principalIdDisplayName": "shadeform-customer-app"
-   }
-  ]
- },
- "resources": [
-  {
-   "type": "Microsoft.ManagedServices/registrationDefinitions",
-   "apiVersion": "2020-02-01-preview",
-   "name": "[variables('mspRegistrationName')]",
-   "properties": {
-    "registrationDefinitionName": "[parameters('mspOfferName')]",
-    "description": "[parameters('mspOfferDescription')]",
-    "managedByTenantId": "[variables('managedByTenantId')]",
-    "authorizations": "[variables('authorizations')]"
-   }
-  },
-  {
-   "type": "Microsoft.ManagedServices/registrationAssignments",
-   "apiVersion": "2020-02-01-preview",
-   "name": "[variables('mspAssignmentName')]",
-   "dependsOn": [
-    "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
-   ],
-   "properties": {
-    "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
-   }
-  }
- ],
- "outputs": {
-  "mspOfferName": {
-   "type": "string",
-   "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
-  },
-  "authorizations": {
-   "type": "array",
-   "value": "[variables('authorizations')]"
-  }
- }
-}
+        "$schema": "https://schema.management.azure.com/schemas/2019-08-01/subscriptionDeploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+         "mspOfferName": {
+          "type": "string",
+          "metadata": {
+           "description": "Specify a unique name for your offer"
+          },
+          "defaultValue": "shadeform-lighthouse"
+         },
+         "mspOfferDescription": {
+          "type": "string",
+          "metadata": {
+           "description": "Name of the Managed Service Provider offering"
+          },
+          "defaultValue": "Grant Shadeform permissions to deploy and manage resources in your account."
+         }
+        },
+        "variables": {
+         "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
+         "mspAssignmentName": "[guid(parameters('mspOfferName'))]",
+         "managedByTenantId": "0e9b4557-88c2-492c-a710-ab1f3308aa45",
+         "authorizations": [
+          {
+           "principalId": "bec65b29-fccc-4475-9ee2-c8432a9b3f01",
+           "roleDefinitionId": "0f37683f-2463-46b6-9ce7-9b788b988ba2",
+           "principalIdDisplayName": "shadeform-customer-app"
+          },
+          {
+           "principalId": "bec65b29-fccc-4475-9ee2-c8432a9b3f01",
+           "roleDefinitionId": "9980e02c-c2be-4d73-94e8-173b1dc7cf3c",
+           "principalIdDisplayName": "shadeform-customer-app"
+          },
+          {
+           "principalId": "bec65b29-fccc-4475-9ee2-c8432a9b3f01",
+           "roleDefinitionId": "4d97b98b-1d4f-4787-a291-c67834d212e7",
+           "principalIdDisplayName": "shadeform-customer-app"
+          }
+         ]
+        },
+        "resources": [
+         {
+          "type": "Microsoft.ManagedServices/registrationDefinitions",
+          "apiVersion": "2020-02-01-preview",
+          "name": "[variables('mspRegistrationName')]",
+          "properties": {
+           "registrationDefinitionName": "[parameters('mspOfferName')]",
+           "description": "[parameters('mspOfferDescription')]",
+           "managedByTenantId": "[variables('managedByTenantId')]",
+           "authorizations": "[variables('authorizations')]"
+          }
+         },
+         {
+          "type": "Microsoft.ManagedServices/registrationAssignments",
+          "apiVersion": "2020-02-01-preview",
+          "name": "[variables('mspAssignmentName')]",
+          "dependsOn": [
+           "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+          ],
+          "properties": {
+           "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
+          }
+         }
+        ],
+        "outputs": {
+         "mspOfferName": {
+          "type": "string",
+          "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
+         },
+         "authorizations": {
+          "type": "array",
+          "value": "[variables('authorizations')]"
+         }
+        }
+       }

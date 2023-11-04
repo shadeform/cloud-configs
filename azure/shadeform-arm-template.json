@@ -36,6 +36,16 @@
            "principalId": "bec65b29-fccc-4475-9ee2-c8432a9b3f01",
            "roleDefinitionId": "4d97b98b-1d4f-4787-a291-c67834d212e7",
            "principalIdDisplayName": "shadeform-customer-app"
+          },
+          {
+           "principalId": "bec65b29-fccc-4475-9ee2-c8432a9b3f01",
+           "roleDefinitionId": "f7b75c60-3036-4b75-91c3-6b41c27c1689",
+           "principalIdDisplayName": "shadeform-customer-app"
+          },
+          {
+           "principalId": "bec65b29-fccc-4475-9ee2-c8432a9b3f01",
+           "roleDefinitionId": "0e5f05e5-9ab9-446b-b98d-1e2157c94125",
+           "principalIdDisplayName": "shadeform-customer-app"
           }
          ]
         },
